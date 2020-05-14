@@ -11,15 +11,16 @@ class Logger:
         is possible by calling get_section_dict method.
     """
 
-    def __init__(self, config):
+    def __init__(self, config, input_config):
         """build the logger and initialize the frame number and set attributes"""
         self.config = config
+        self.input_config = input_config
         # Logger name, at this time only csv_logger is supported. You can implement your own logger
         # by following csv_logger implementation as an example.
         self.name = self.config.get_section_dict("Logger")["Name"]
         if self.name == "csv_logger":
             from . import csv_processed_logger
-            self.logger = csv_processed_logger.Logger(self.config)
+            self.logger = csv_processed_logger.Logger(self.config, self.input_config)
 
             # For Logger instance from loggers/csv_logger
             # region csv_logger

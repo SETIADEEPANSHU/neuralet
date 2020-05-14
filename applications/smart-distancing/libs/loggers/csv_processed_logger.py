@@ -3,7 +3,7 @@ import os
 from datetime import date, datetime
 from tools.environment_score import mx_environment_scoring_consider_crowd
 from tools.objects_post_process import extract_violating_objects
-
+from libs.input_config import InputConfig
 import numpy as np
 
 
@@ -17,12 +17,13 @@ class Logger:
         is possible by calling get_section_dict method.
     """
 
-    def __init__(self, config):
+    def __init__(self, config, input_config:InputConfig):
         self.config = config
+        self.input_config = input_config
         # The parent directory that stores all log file.
         self.log_directory = config.get_section_dict("Logger")["LogDirectory"]
         # A directory inside the log_directory that stores object log files.
-        self.objects_log_directory = os.path.join(self.log_directory, "objects_log")
+        self.objects_log_directory = os.path.join(self.log_directory, "objects_log", self.input_config.camera_id)
         self.dist_threshold = config.get_section_dict("PostProcessor")["DistThreshold"]
 
         if not os.path.exists(self.log_directory):

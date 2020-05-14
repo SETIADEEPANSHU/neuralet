@@ -176,9 +176,7 @@ class WebGUI:
 
     def _run(self):
         time.sleep(1)
-        # Get video file path from the config
-        video_path = self.config.get_section_dict("App")["VideoPath"]
-        self.__ENGINE_INSTANCE.process_video(video_path)
+        self.__ENGINE_INSTANCE.process_video()
 
     def start(self):
         """

@@ -85,7 +85,7 @@ function Charts() {
 
     function update() {
         const headers = {'Cache-Control': 'no-store'};
-        const url = `/static/data/objects_log/${new Date().toISOString().slice(0, 10)}.csv`;
+        const url = `/static/data/objects_log/default/${new Date().toISOString().slice(0, 10)}.csv`;
         axios.get(url, {headers}).then(response => {
             let records = Plotly.d3.csv.parse(response.data);
             let x1 = [], y1 = [], y2 = [], env_score = [];
